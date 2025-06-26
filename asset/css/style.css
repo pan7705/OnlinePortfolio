@@ -153,6 +153,16 @@ section {
     width: 20px;
 }
 
+.contact-item a {
+    text-decoration: underline;
+    color: inherit;
+    transition: color 0.3s ease; 
+}
+
+.contact-item a:hover {
+    color: var(--primary-color);
+}
+
 /* Resume Button */
 .resume-button {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
@@ -363,45 +373,60 @@ section {
 
 .lightbox-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    width: 90%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 1200px;
+    max-height: 800px;
 }
 
 .lightbox-image {
     max-width: 100%;
-    max-height: 100vh;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    background: white;
+    display: block;
+    margin: 0 auto;
 }
 
 .lightbox-close {
     position: absolute;
-    top: -50px;
+    top: -20px;
     right: 0;
-    background: none;
-    border: none;
+    background: rgba(255, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    font-size: 2.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 10001;
 }
 
 .lightbox-close:hover {
-    opacity: 0.7;
+    background: rgba(255, 0, 0, 0.2);
+    transform: scale(1.1);
 }
 
 .lightbox-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
     width: 60px;
     height: 60px;
@@ -416,8 +441,9 @@ section {
 }
 
 .lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateY(-50%) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .lightbox-nav.prev {
@@ -431,20 +457,26 @@ section {
 .lightbox-nav:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .lightbox-nav:disabled:hover {
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .lightbox-info {
     position: absolute;
-    bottom: -60px;
+    bottom: -30px;
     left: 0;
     right: 0;
     text-align: center;
     color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
 }
 
 .lightbox-title {
@@ -613,6 +645,11 @@ section {
         display: none;
     }
 
+    .lightbox-content {
+        width: 95%;
+        height: 85%;
+    }
+
     .lightbox-nav {
         width: 50px;
         height: 50px;
@@ -620,11 +657,29 @@ section {
     }
 
     .lightbox-nav.prev {
-        left: -60px;
+        left: 10px;
     }
 
     .lightbox-nav.next {
-        right: -60px;
+        right: 10px;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .lightbox-info {
+        bottom: -60px;
+        padding: 8px;
+    }
+
+    .lightbox-image {
+        max-width: 95vw;
+        max-height: 70vh;
     }
 
     .section-title {
@@ -650,17 +705,34 @@ section {
 }
 
 @media (max-width: 480px) {
+    .lightbox-content {
+        width: 98%;
+        height: 80%;
+    }
+
     .lightbox-nav.prev {
-        left: 10px;
+        left: 5px;
     }
 
     .lightbox-nav.next {
-        right: 10px;
+        right: 5px;
+    }
+
+    .lightbox-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
     }
 
     .lightbox-close {
-        top: 10px;
-        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .lightbox-info {
+        bottom: -50px;
+        font-size: 0.9rem;
     }
 
     .projects-swiper {
