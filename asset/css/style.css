@@ -458,6 +458,82 @@ section {
     opacity: 0.7;
 }
 
+/* Swiper Styles */
+.projects-swiper {
+    padding: 20px 60px;
+    position: relative;
+}
+
+.swiper-wrapper {
+    padding-bottom: 30px;
+}
+
+.swiper-slide {
+    height: auto;
+    display: flex; 
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    min-height: 500px; 
+}
+
+.project-content {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.project-title {
+    margin-bottom: 10px;
+}
+
+.project-description {
+    flex: 1; 
+    margin-bottom: 15px;
+}
+
+.project-technologies {
+    margin-top: auto; 
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0; 
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next {
+    right: 10px; 
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 1.2rem;
+}
+
+.swiper-pagination-bullet {
+    background: var(--text-light);
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary-color);
+}
+
 /* Programming Languages Section */
 .languages-section {
     background: var(--bg-light);
@@ -495,7 +571,11 @@ section {
 .language-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--text-dark);
+    /* color: var(--text-dark); */
+}
+
+[data-theme="dark"] .language-name {
+    color: black;
 }
 
 .progress-bar {
@@ -550,6 +630,23 @@ section {
     .section-title {
         font-size: 2rem;
     }
+
+    .projects-swiper {
+        padding: 20px 50px; 
+    }
+    
+    .project-card {
+        margin: 0 10px;
+        min-height: 450px;
+    }
+    
+    .swiper-button-prev {
+        left: 5px; 
+    }
+    
+    .swiper-button-next {
+        right: 5px; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -564,5 +661,20 @@ section {
     .lightbox-close {
         top: 10px;
         right: 10px;
+    }
+
+    .projects-swiper {
+        padding: 20px 40px; 
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 1rem;
     }
 }

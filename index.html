@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+	<!-- Swiper CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	
 	<link rel="stylesheet" href="asset/css/style.css">
 </head>
 <body>
@@ -52,8 +54,7 @@
 				<div class="col-lg-6 order-2 order-lg-1">
 					<div class="home-content">
 						<h1>Irfan Haqim</h1>
-						<div class="title">Full Stack Developer</div>
-						<p class="bio">Passionate developer with experience in web development and programming. I love creating innovative solutions and learning new technologies.</p>
+						<p class="bio">Computer Science graduate with a background in multimedia computing and hands-on experience in full-stack development through academic and internship projects. Motivated, detail-oriented, and eager to learn while contributing to meaningful digital solutions within a collaborative team environment.</p>
                         <div class="contact-info">
                             <div class="contact-item">
                                 <i class="fas fa-envelope"></i>
@@ -100,16 +101,15 @@
 	<section id="projects" class="projects-section">
 		<div class="container">
 			<h2 class="section-title">Past Projects</h2>
-			<div class="projects-container">
-				<button class="nav-arrow prev" id="prevBtn">
-					<i class="fas fa-chevron-left"></i>
-				</button>
-				<div class="projects-grid" id="projectsGrid">
+			<div class="swiper projects-swiper">
+				<div class="swiper-wrapper">
 					<!-- Projects will be loaded here by JavaScript -->
 				</div>
-				<button class="nav-arrow next" id="nextBtn">
-					<i class="fas fa-chevron-right"></i>
-				</button>
+				<!-- Add navigation buttons -->
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+				<!-- Add pagination -->
+				<div class="swiper-pagination"></div>
 			</div>
 		</div>
 	</section>
@@ -225,6 +225,8 @@
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Swiper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 	<script>
 		const projects = [
@@ -376,6 +378,7 @@
             }
         ];
 
+		let projectsSwiper;
 		let currentPage = 0;
 		const projectsPerPage = 2;
 		const totalPages = Math.ceil(projects.length / projectsPerPage);
@@ -384,38 +387,60 @@
 		let currentLightboxProject = null;
 		let currentLightboxIndex = 0;
 
+		function initSwiper() {
+			projectsSwiper = new Swiper('.projects-swiper', {
+				slidesPerView: 1,
+				spaceBetween: 20,
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				breakpoints: {
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 30
+					}
+				}
+			});
+		}
+
 		function renderProjects() {
-			const startIndex = currentPage * projectsPerPage;
-			const endIndex = startIndex + projectsPerPage;
-			const currentProjects = projects.slice(startIndex, endIndex);
+			const swiperWrapper = document.querySelector('.swiper-wrapper');
+			swiperWrapper.innerHTML = '';
 
-			const projectsGrid = document.getElementById('projectsGrid');
-			projectsGrid.innerHTML = '';
-
-			currentProjects.forEach((project, index) => {
-				const projectCard = document.createElement('div');
-				projectCard.className = 'project-card';
-				projectCard.innerHTML = `
-					<div class="project-image" onclick="openLightbox(${startIndex + index}, 0)">
-						<img src="${project.thumbnail}" alt="${project.title}" class="project-thumbnail">
-						<div class="project-image-overlay">
-							<i class="fas fa-search-plus"></i>
+			projects.forEach((project, index) => {
+				const projectSlide = document.createElement('div');
+				projectSlide.className = 'swiper-slide';
+				projectSlide.innerHTML = `
+					<div class="project-card">
+						<div class="project-image" onclick="openLightbox(${index}, 0)">
+							<img src="${project.thumbnail}" alt="${project.title}" class="project-thumbnail">
+							<div class="project-image-overlay">
+								<i class="fas fa-search-plus"></i>
+							</div>
 						</div>
-					</div>
-					<div class="project-content">
-						<h3 class="project-title">${project.title}</h3>
-						<p class="project-description">${project.description}</p>
-						<div class="project-technologies">
-							${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+						<div class="project-content">
+							<h3 class="project-title">${project.title}</h3>
+							<p class="project-description">${project.description}</p>
+							<div class="project-technologies">
+								${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+							</div>
 						</div>
 					</div>
 				`;
-				projectsGrid.appendChild(projectCard);
+				swiperWrapper.appendChild(projectSlide);
 			});
 
-			// Update navigation buttons
-			document.getElementById('prevBtn').disabled = currentPage === 0;
-			document.getElementById('nextBtn').disabled = currentPage === totalPages - 1;
+			// Initialize or update Swiper
+			if (projectsSwiper) {
+				projectsSwiper.update();
+			} else {
+				initSwiper();
+			}
 		}
 
 		// Lightbox functions
@@ -437,17 +462,11 @@
 			const lightboxImage = document.getElementById('lightboxImage');
 			const lightboxTitle = document.getElementById('lightboxTitle');
 			const lightboxCounter = document.getElementById('lightboxCounter');
-			const lightboxPrev = document.getElementById('lightboxPrev');
-			const lightboxNext = document.getElementById('lightboxNext');
 
 			lightboxImage.src = project.images[currentLightboxIndex];
 			lightboxImage.alt = project.title;
 			lightboxTitle.textContent = project.title;
 			lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${project.images.length}`;
-
-			// Update navigation buttons
-			lightboxPrev.disabled = currentLightboxIndex === 0;
-			lightboxNext.disabled = currentLightboxIndex === project.images.length - 1;
 		}
 
 		function previousLightboxImage() {
@@ -464,21 +483,6 @@
 				updateLightboxImage();
 			}
 		}
-
-		// Navigation event listeners
-		document.getElementById('prevBtn').addEventListener('click', () => {
-			if (currentPage > 0) {
-				currentPage--;
-				renderProjects();
-			}
-		});
-
-		document.getElementById('nextBtn').addEventListener('click', () => {
-			if (currentPage < totalPages - 1) {
-				currentPage++;
-				renderProjects();
-			}
-		});
 
 		// Lightbox event listeners
 		document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
