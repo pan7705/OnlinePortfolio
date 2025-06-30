@@ -342,7 +342,7 @@ section {
     left: -15px;
 }
 
-/* Projects Section */
+/* Past Projects Section */
 .projects-section {
     background: var(--body-bg);
 }
@@ -718,13 +718,17 @@ section {
 
 /* Programming Languages Section */
 .languages-section {
-    background: var(--bg-light);
+    background: linear-gradient(135deg, var(--bg-light) 0%, rgba(37, 99, 235, 0.05) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .languages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
+    width: 100%;
 }
 
 .language-card {
@@ -779,6 +783,59 @@ section {
     margin-top: 0.5rem;
     font-weight: 600;
     color: var(--text-light);
+}
+
+/* CTA */
+.contact-form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.contact-form .form-control {
+    background: var(--card-bg);
+    border: 1px solid var(--text-light);
+    color: var(--text-dark);
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="dark"] .contact-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-form .btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.contact-form .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+}
+
+.contact-section .row {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-section .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 600px;
 }
 
 /* Responsive */
