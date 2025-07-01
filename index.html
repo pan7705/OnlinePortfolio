@@ -13,6 +13,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<!-- Swiper CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<!-- SweetAlert CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	
 	<link rel="stylesheet" href="asset/css/style.css">
 </head>
@@ -303,7 +305,7 @@
 			<h2 class="section-title">Get In Touch</h2>
 			<div class="row">
 				<div class="col-lg-12">
-					<form action="https://formspree.io/f/xrbkjpln" method="POST" class="contact-form">
+					<form id="contactForm" class="contact-form">
 						<div class="mb-3">
 							<input type="text" name="name" class="form-control" placeholder="Your Name" required>
 						</div>
@@ -324,6 +326,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Swiper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<!-- SweetAlert JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 	<script>
 		const projects = [
@@ -714,5 +719,56 @@
             }
         });
     </script>
+
+	<!-- CTA SweetAlert -->
+	<script>
+		document.getElementById('contactForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			
+			const form = e.target;
+			const formData = new FormData(form);
+			const submitButton = form.querySelector('button[type="submit"]');
+			
+			const originalButtonText = submitButton.textContent;
+			submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+			submitButton.disabled = true;
+			
+			fetch('https://formspree.io/f/xrbkjpln', {
+				method: 'POST',
+				body: formData,
+				headers: {
+					'Accept': 'application/json'
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					Swal.fire({
+						title: 'Success!',
+						text: 'Your message has been sent successfully.',
+						icon: 'success',
+						confirmButtonText: 'OK',
+						confirmButtonColor: '#2563eb'
+					});
+					form.reset();
+				} else {
+					throw new Error('Network response was not ok');
+				}
+			})
+			.catch(error => {
+				Swal.fire({
+					title: 'Error!',
+					text: 'There was a problem sending your message. Please try again later.',
+					icon: 'error',
+					confirmButtonText: 'OK',
+					confirmButtonColor: '#2563eb'
+				});
+				console.error('Error:', error);
+			})
+			.finally(() => {
+				submitButton.textContent = originalButtonText;
+				submitButton.disabled = false;
+			});
+		});
+	</script>
 </body>
 </html>

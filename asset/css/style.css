@@ -838,6 +838,11 @@ section {
     max-width: 600px;
 }
 
+.btn-primary .spinner-border {
+    vertical-align: text-top;
+    margin-right: 5px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .home-content h1 {
