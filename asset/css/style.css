@@ -222,10 +222,23 @@ section {
     height: 100%;
     background: var(--bg-dark);
     top: 0;
-    left: 50%;
+    left: 50px; 
     margin-left: -3px;
     z-index: 1;
     animation: moveline 6s linear forwards;
+}
+
+.timeline-container img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    left: 0; 
+    z-index: 10;
+    background: white;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    object-fit: cover;
 }
 
 [data-theme="dark"] .timeline::after {
@@ -238,52 +251,31 @@ section {
 }
 
 .timeline-container {
-    padding: 10px 50px;
+    padding: 10px 40px 10px 80px; 
     position: relative;
-    width: 50%;
+    width: 100%;
     opacity: 0;
     transition: all 0.8s ease;
+    transform: translateX(-20px);
 }
 
 .timeline-container.in-view {
     opacity: 1;
+    transform: translateX(0);
 }
 
-.timeline-container img {
-    position: absolute;
-    width: 40px;
-    border-radius: 50%;
-    right: -20px;
-    top: 32px;
-    z-index: 10;
-    background: white;
-    padding: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
 
-.left-container {
-    left: 0;
-    z-index: 5; 
-}
-
-.right-container {
-    left: 50%;
-    z-index: 2; 
-}
-
-.right-container img {
-    left: -20px;
-}
 
 .timeline-textbox {
-    padding: 20px 30px;
+    padding: 30px;
     background: var(--timeline-card-bg, #fff);
     position: relative;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     color: var(--timeline-text-color, #333);
-    transform: translateY(20px);
-    transition: all 0.8s ease;
+    width: 100%;
+    margin-bottom: 40px;
+    transition: all 0.8s ease 0.3s;
 }
 
 .timeline-container.in-view .timeline-textbox {
@@ -293,6 +285,11 @@ section {
 .timeline-textbox h2 {
     font-weight: 600;
     margin-bottom: 5px;
+}
+
+.timeline-textbox h5 {
+    margin-bottom: 10px;
+    color: var(--timeline-date-color);
 }
 
 .timeline-textbox small {
@@ -307,12 +304,12 @@ section {
 }
 
 .timeline-textbox ul {
-    list-style: none;
-    padding: 0;
+    list-style: disc;
+    padding-left: 20px;
     margin: 10px 0;
     background-color: var(--timeline-list-bg, #f0f0f0);
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px 15px 15px 35px;
 }
 
 .timeline-textbox ul p {
@@ -322,23 +319,13 @@ section {
 }
 
 .timeline-textbox ul li {
-    padding: 3px 0;
+    padding: 5px 0;
     color: var(--timeline-list-text, #666);
+    position: relative;
+    line-height: 1.6;
 }
 
-.left-container-arrow {
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: 28px;
-    z-index: 1;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid var(--timeline-card-bg, #fff);
-    right: -15px;
-}
-
-.right-container-arrow {
+.container-arrow {
     height: 0;
     width: 0;
     position: absolute;
@@ -349,6 +336,30 @@ section {
     border-right: 15px solid var(--timeline-card-bg, #fff);
     left: -15px;
 }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-container.in-view .timeline-textbox {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.timeline-container:nth-child(1).in-view {
+    transition-delay: 0.2s;
+}
+
+.timeline-container:nth-child(2).in-view {
+    transition-delay: 0.4s;
+}
+
 
 /* Past Projects Section */
 .projects-section {
@@ -926,30 +937,6 @@ section {
     
     .swiper-button-next {
         right: 5px; 
-    }
-
-    .timeline::after {
-        left: 30px;
-    }
-    
-    .timeline-container {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-    
-    .left-container, .right-container {
-        left: -20px;
-    }
-    
-    .left-container img, .right-container img {
-        left: 10px;
-    }
-    
-    .left-container-arrow, .right-container-arrow {
-        border-right: 15px solid var(--timeline-card-bg, #fff);
-        border-left: 0;
-        left: -15px;
     }
 }
 

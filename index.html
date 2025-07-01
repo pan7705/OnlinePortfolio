@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Irfan Haqim</title>
+	<title>Irfan Haqim Portfolio</title>
 	<link rel="icon" type="image/png" href="asset/image/other/logo-navbar.png">
 
 	<!-- Bootstrap CSS -->
@@ -103,71 +103,41 @@
 				</div>
 			</div>
 				
-
 			<!-- Timeline Section -->
 			<div class="timeline">
-				<div class="timeline-container left-container">
-					<img src="asset/image/logo/logoUITM.png">
+				<div class="timeline-container">
+					<img src="asset/image/logo/logoTarsoft.png">
 					<div class="timeline-textbox">
-						<h2>UiTM Shah Alam</h2>
-						<small>2023 - Now</small>
-						<p>Presently thriving at UiTM Shah Alam, my academic journey evolves in this vibrant hub of knowledge. Surrounded by cutting-edge resources and a diverse academic community, it amplifies my pursuit of excellence. UiTM Shah Alam becomes the current canvas where I paint my educational aspirations, fostering growth and expertise.</p>
+						<h2>Tarsoft Sdn. Bhd.</h2>
+						<h5>Software Engineer Internship</h5>
+						<small>March 2025 - June 2025</small>
 						<ul>
-							<p>My class</p>
-							<li>CDCS253 3A - CDCS253 7A</li>
+							<li>Developed and enhanced web-based systems using Laravel, focusing on MVC architecture and clean code practices.</li>
+							<li>Designed and implemented multi-table relational databases for CRUD-based modules</li>
+							<li>Built and consumed API, applying advanced Eloquent ORM queries with scopes, accessors, and mutators.</li>
+							<li>Implemented core Laravel functionalities including validation, authorization (privacy & policy), notifications, model observers, and error handling.</li>
+							<li>Collaborated on real-world client projects from the first month as a full-stack developer.</li>
+							<li>Practiced version control and team collaboration through Git and GitHub, following proper branching and pull request workflows.</li>
+							<li>Gained hands-on experience with Laravel best practices, Git commands, and API integration in a live development environment.</li>
 						</ul>
-						<span class="left-container-arrow"></span>
+						<span class="container-arrow"></span>
 					</div>
 				</div>
 
-				<div class="timeline-container right-container">
-					<img src="asset/image/logo/logoUITM.png">
+				<div class="timeline-container">
+					<img src="asset/image/logo/logoEvantage.webp">
 					<div class="timeline-textbox">
-						<h2>UiTM Segamat</h2>
-						<small>2020 - 2022</small>
-						<p>Progressing from SMKKK, UiTM Segamat unfolds as my next academic frontier. Guided by excellence and diverse opportunities, it promises a continuation of growth and specialized learning, propelling me toward a future enriched with knowledge and accomplishment.</p>
+						<h2>Evantage Solutions Sdn. Bhd.</h2>
+						<h5>Internship</h5>
+						<small>September 2022 - February 2023</small>
 						<ul>
-							<p>My class</p>
-							<li>JCS1101F - JCS1104F</li>
+							<li>Contributed to the development and improvement of a web-based user interface for a Computerized Maintenance Management System (CMMS) using React.js.</li>
+							<li>Focused on creating a modern, user-friendly design to enhance usability and streamline maintenance scheduling and asset tracking.</li>
+							<li>Redesigned the CMMS interface to support real-time data synchronization, significantly improving task efficiency.</li>
+							<li>Collaborated closely with a senior programmer to troubleshoot front-end issues and ensure a smooth user experience.</li>
+							<li>Gained hands-on experience with new tools and technologies while sharpening problem-solving skills.</li>
 						</ul>
-						<span class="right-container-arrow"></span>
-					</div>
-				</div>
-
-				<div class="timeline-container left-container">
-					<img src="asset/image/logo/logoSMKKK.png">
-					<div class="timeline-textbox">
-						<h2>SMK Kota Kemuning</h2>
-						<small>2015 - 2019</small>
-						<p>Continuing next to the foundations laid at Sekolah Menengah Kebangsaan Kota Kemuning (SMKKK), my educational journey has been shaped by the values instilled and experiences gained.</p>
-						<ul>
-							<p>My class</p>
-							<li>1 Helcia</li>
-							<li>2 Liparis</li>
-							<li>3 Liparis</li>
-							<li>4 SS1</li>
-							<li>5 SS1</li>                        
-						</ul>
-						<span class="left-container-arrow"></span>
-					</div>
-				</div>
-
-				<div class="timeline-container right-container">
-					<img src="asset/image/logo/logoSKBR.png">
-					<div class="timeline-textbox">
-						<h2>SK Bukit Rimau</h2>
-						<small>2009 - 2014</small>
-						<p>Beginning my academic journey at Sekolah Kebangsaan Bukit Rimau (SKBR) was a pivotal chapter. The school's dynamic environment and dedicated educators cultivated my early passion for learning. From diverse subjects to enriching extracurriculars, SKBR provided a holistic education.</p>
-						<ul>
-							<p>My class</p>
-							<li>1 Lestari</li>
-							<li>2 Usaha</li>
-							<li>3 Kreatif</li>
-							<li>4 Lestari</li>
-							<li>4 Azam</li>
-							<li>6 Azam</li>
-						</ul>
-						<span class="right-container-arrow"></span>
+						<span class="container-arrow"></span>
 					</div>
 				</div>
 			</div>
@@ -669,7 +639,7 @@
 					var rect = timelineSection.getBoundingClientRect();
 					var windowHeight = window.innerHeight || document.documentElement.clientHeight;
 					
-					var triggerPoint = windowHeight * 0.7;
+					var triggerPoint = windowHeight * 0.8;
 					var isVisible = rect.top <= triggerPoint && rect.bottom >= 0;
 					
 					if (isVisible) {
@@ -679,13 +649,14 @@
 						items.forEach(function(item, index) {
 							setTimeout(function() {
 								item.classList.add("in-view");
-							}, index * 900); 
+							}, index * 300); 
 						});
 					}
 				}
 			}
 			
 			window.addEventListener("scroll", callbackFunc);
+			window.addEventListener("load", callbackFunc);
 			
 			callbackFunc();
 		})();
