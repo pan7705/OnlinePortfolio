@@ -102,8 +102,8 @@ section {
 /* Home Section */
 .home-section {
     background: var(--body-bg);
-    /* min-height: calc(100vh - 80px); */
-    height: 100vh;
+    min-height: calc(110vh - 80px);
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     padding: 80px 0 0;
