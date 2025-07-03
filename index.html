@@ -687,28 +687,57 @@
 			});
 		});
 
-		const observerOptions = {
-			threshold: 0.5,
-			rootMargin: "0px 0px -100px 0px",
-		};
+		//Programming Languages Animation
+		document.addEventListener('DOMContentLoaded', function() {
+			const languagesSection = document.getElementById('languages');
+			let animationTriggered = false;
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					const progressBars =
-						entry.target.querySelectorAll(".progress-fill");
-					progressBars.forEach((bar) => {
-						const width = bar.style.width;
-						bar.style.width = "0%";
-						setTimeout(() => {
-							bar.style.width = width;
-						}, 100);
-					});
+			function checkScroll() {
+				if (animationTriggered || !languagesSection) return;
+
+				const rect = languagesSection.getBoundingClientRect();
+				const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+				
+				const triggerPoint = windowHeight * 0.7;
+				const isVisible = rect.top <= triggerPoint && rect.bottom >= 0;
+
+				if (isVisible) {
+					animationTriggered = true;
+					animateSkills();
+					window.removeEventListener('scroll', checkScroll);
 				}
-			});
-		}, observerOptions);
+			}
 
-		observer.observe(document.getElementById("languages"));
+			function animateSkills() {
+				const progressBars = document.querySelectorAll('.progress-fill');
+				const progressTexts = document.querySelectorAll('.progress-text');
+				
+				progressBars.forEach(bar => {
+					const targetWidth = bar.style.width;
+					bar.setAttribute('data-target-width', targetWidth);
+					bar.style.width = '0';
+					bar.style.opacity = '0';
+				});
+				
+				setTimeout(() => {
+					progressBars.forEach(bar => {
+						bar.classList.add('animate');
+						bar.style.width = bar.getAttribute('data-target-width');
+					});
+					
+					setTimeout(() => {
+						progressTexts.forEach(text => {
+							text.classList.add('show');
+						});
+					}, 1000); 
+				}, 100); 
+			}
+
+			if (languagesSection) {
+				window.addEventListener('scroll', checkScroll);
+				checkScroll(); 
+			}
+		});
 
 		// Timeline Animation
 		(function () {
@@ -730,7 +759,6 @@
 						animationTriggered = true;
 						timeline.classList.add("in-view");
 
-						// Animate each container with delays
 						items.forEach(function (item, index) {
 							setTimeout(function () {
 								item.classList.add("in-view");
