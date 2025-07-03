@@ -257,14 +257,13 @@ section {
     opacity: 0;
     transition: all 0.8s ease;
     transform: translateX(-20px);
+    z-index: 2;
 }
 
 .timeline-container.in-view {
     opacity: 1;
     transform: translateX(0);
 }
-
-
 
 .timeline-textbox {
     padding: 30px;
@@ -276,6 +275,7 @@ section {
     width: 100%;
     margin-bottom: 40px;
     transition: all 0.8s ease 0.3s;
+    z-index: 2;
 }
 
 .timeline-container.in-view .timeline-textbox {
@@ -330,7 +330,7 @@ section {
     width: 0;
     position: absolute;
     top: 28px;
-    z-index: 1;
+    z-index: 2;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     border-right: 15px solid var(--timeline-card-bg, #fff);
