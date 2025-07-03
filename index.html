@@ -715,26 +715,26 @@
 			"use strict";
 
 			var items = document.querySelectorAll(".timeline-container");
-			var timelineSection = document.querySelector(".timeline");
+			var timeline = document.querySelector(".timeline");
 			var animationTriggered = false;
 
 			function callbackFunc() {
 				if (!animationTriggered) {
-					var rect = timelineSection.getBoundingClientRect();
-					var windowHeight =
-						window.innerHeight || document.documentElement.clientHeight;
+					var rect = timeline.getBoundingClientRect();
+					var windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
 					var triggerPoint = windowHeight * 0.8;
 					var isVisible = rect.top <= triggerPoint && rect.bottom >= 0;
 
 					if (isVisible) {
 						animationTriggered = true;
-						timelineSection.classList.add("in-view");
+						timeline.classList.add("in-view");
 
+						// Animate each container with delays
 						items.forEach(function (item, index) {
 							setTimeout(function () {
 								item.classList.add("in-view");
-							}, index * 300);
+							}, 500 + (index * 1000)); 
 						});
 					}
 				}
